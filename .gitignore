@@ -28,6 +28,3 @@
 
 ### 追加設定 ###
 *.class
-/gradle/wrapper/
-gradlew
-gradlew.bat
