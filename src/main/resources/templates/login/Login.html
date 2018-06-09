@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- ログイン画面 -->
+<html xmins:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>ログイン画面</title>
+	</head>
+<body>
+	<p th:text="${memo}"></p>
+	<form name="LOGIN_FORM" action="/menu" method="post">
+		<table>
+			<tr>
+				<td>ログインID</td>
+				<td><input type="text" name="LOGIN_ID" maxlength="15"></td>
+			</tr>
+			<tr>
+				<td>パスワード</td>
+				<td><input type="password" name="PASSWORD" maxlength="15"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="ログイン"></td>
+				<td><input type="reset" value="クリア"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
