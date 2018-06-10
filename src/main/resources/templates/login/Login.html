@@ -4,7 +4,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ログイン画面</title>
-		<link rel="stylesheet" type="text/css" href="/css/vali.css" th:href="@{/css/vali.css}">
+		<link rel="stylesheet" type="text/css" href="/css/vali.css"S>
 	</head>
 <body>
 	<p th:text="${memo}"></p>
@@ -18,9 +18,9 @@
 				<td>パスワード</td>
 				<td><input type="password" name="PASSWORD" maxlength="15"></td>
 			</tr>
-			<tr>
-				<td><input type="submit" value="ログイン"></td>
-				<td><input type="reset" value="クリア"></td>
+			<tr style="text-align: center; margin-top: 100px; ">
+				<td><input type="submit" style="font-size: 50px; margin-top: 10px;" value="ログイン"></td>
+				<td><input type="reset" style="font-size: 50px; margin-top: 10px;" value="クリア"></td>
 			</tr>
 		</table>
 	</form>

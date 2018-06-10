@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
 body {
-	background: lime;
+	background-color: #CCFF99;
 }
 
 table {
+	padding: 30px;
+	background-color: white;
 	margin: auto;
 }
