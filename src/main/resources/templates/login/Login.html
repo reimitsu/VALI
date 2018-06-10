@@ -4,26 +4,27 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ログイン画面</title>
-		<link rel="stylesheet" type="text/css" href="/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="/css/Normalize.css">
 		<link rel="stylesheet" type="text/css" href="/css/vali.css">
 	</head>
 <body>
-	<p th:text="${memo}"></p>
+	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
 	<form name="LOGIN_FORM" action="/menu" method="post">
 		<table>
 			<tr>
-				<td>ログインID</td>
-				<td><input type="text" name="LOGIN_ID" maxlength="15"></td>
+				<td>ユーザID</td>
+				<td><input type="text" name="USER_ID" maxlength="15"></td>
 			</tr>
 			<tr>
 				<td>パスワード</td>
 				<td><input type="password" name="PASSWORD" maxlength="15"></td>
 			</tr>
-			<tr style="text-align: center; margin-top: 100px; ">
-				<td><input type="submit" style="font-size: 50px; margin-top: 10px;" value="ログイン"></td>
-				<td><input type="reset" style="font-size: 50px; margin-top: 10px;" value="クリア"></td>
+			<tr style="text-align: end;">
+				<td><input type="submit" style="font-size: 17px; margin-top: 15px;" value="ログイン"></td>
+				<td><input type="reset" style="font-size: 17px; margin-top: 15px;" value="クリア"></td>
 			</tr>
 		</table>
+		<div class="fugu"></div>
 	</form>
 </body>
 </html>
