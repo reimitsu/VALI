@@ -2,10 +2,8 @@ package com.vali.common;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Properties;
 
@@ -37,12 +35,9 @@ public class ValiUtility implements AutoCloseable {
                 InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF_8);
                 BufferedReader br = new BufferedReader(isr);){
             prop.load(br);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new ValiError();
         }
         return prop.getProperty(keyName);
     }
@@ -66,12 +61,9 @@ public class ValiUtility implements AutoCloseable {
                 propValue = MessageFormat.format(prop.getProperty(ValiConstant.LOG_PROP_FILE_KEY + errorCd), arg);
             }
             log.error(propValue);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new ValiError();
         }
     }
 }

@@ -16,7 +16,9 @@ public class SystemErrorHandler {
      */
     @ExceptionHandler(Exception.class)
     public String handleError(Exception exception) {
-        exception.printStackTrace();
+        if(!(exception instanceof ValiError)) {
+            exception.printStackTrace();
+        }
         return "Error";
     }
 }
