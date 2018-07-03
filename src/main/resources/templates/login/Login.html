@@ -4,9 +4,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>ログイン画面</title>
-		<script type="text/javascript" src="webjars/jquery/3.3.1/jquery.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="/css/normalize.css">
-		<link rel="stylesheet" type="text/css" href="/css/vali.css">
+		<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/normalize.css">
+		<link rel="stylesheet" href="/css/common.css">
 	</head>
 <body>
 	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
@@ -27,7 +27,8 @@
 		</table>
 	</form>
 	<span th:text="${message}"></span>
-	<div style="width: 180px; height: 215px; margin: auto; margin-top: 100px; background-image: url('../image/fugu.png');"></div>
+	<div style="width: 180px; height: 215px; margin: auto; margin-top: 100px;
+		background-image: url('../image/fugu.png'); background-repeat: no-repeat;"></div>
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 		$(function(){

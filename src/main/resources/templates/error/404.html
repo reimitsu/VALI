@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<!-- メニュー画面 -->
+<!-- エラー画面 -->
 <html xmins:th="http://www.thymeleaf.org">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>メニュー画面</title>
-		<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+		<title>エラー画面</title>
 		<link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="/css/common.css">
 	</head>
 <body>
 	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
-	<p th:text="ログイン中ユーザ"></p>
-	<p th:text="|${username} 様|"></p>
+	<div>ページが見つかりません。</div>
 </body>
 </html>

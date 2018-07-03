@@ -1,5 +1,6 @@
 package com.vali.login.controll;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,11 +22,17 @@ public class LoginControll {
             @RequestAttribute(name = WebAttributes.AUTHENTICATION_EXCEPTION, required = false) Exception exception,
             ModelAndView mav) {
         mav.addObject("USER_ID", userId);
+        String viewName = "login/Login.html";
         //ログイン認証失敗時、画面にメッセージを出力
         if(exception != null) {
-            mav.addObject("message", ValiMessage.LOGIN_FAILED_MSG);
+            if(exception instanceof BadCredentialsException) {
+                mav.addObject("message", ValiMessage.LOGIN_FAILED_MSG);
+            //システムエラーの場合、エラー画面に遷移
+            } else {
+                viewName = "Error.html";
+            }
         }
-        mav.setViewName("login/Login.html");
+        mav.setViewName(viewName);
         return mav;
     }
 }

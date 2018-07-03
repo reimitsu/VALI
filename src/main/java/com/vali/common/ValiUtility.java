@@ -32,13 +32,11 @@ public class ValiUtility implements AutoCloseable {
      * @return 取得値
      */
     public static String readProperties(String filePath, String keyName) {
-        String propValue = "";
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream(filePath);
                 InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF_8);
                 BufferedReader br = new BufferedReader(isr);){
             prop.load(br);
-            propValue = prop.getProperty(keyName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -46,7 +44,7 @@ public class ValiUtility implements AutoCloseable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return propValue;
+        return prop.getProperty(keyName);
     }
 
     /**

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -54,9 +53,6 @@ public class LoginService implements UserDetailsService {
         } catch (EmptyResultDataAccessException e) {
             ValiUtility.logWrite("VALIER002", username);
             throw new UsernameNotFoundException("");
-        //DBアクセス失敗時、エラー画面に遷移
-        } catch (DataAccessException e) {
-            e.printStackTrace();
         }
         String password = user.getPassword();
         ArrayList<String> roles = new ArrayList<String>();
