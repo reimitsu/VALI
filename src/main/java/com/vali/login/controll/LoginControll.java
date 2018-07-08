@@ -27,7 +27,7 @@ public class LoginControll {
         if(exception != null) {
             if(exception instanceof BadCredentialsException) {
                 mav.addObject("message", ValiMessage.LOGIN_FAILED_MSG);
-            //システムエラーの場合、エラー画面に遷移
+            //システムエラーが発生した場合、エラー画面に遷移
             } else {
                 viewName = "Error.html";
             }

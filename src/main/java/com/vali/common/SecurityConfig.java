@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .failureForwardUrl("/")
             .defaultSuccessUrl("/menu", true)
             .usernameParameter("USER_ID").passwordParameter("PASSWORD").and();
+
         http.logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/")

@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <!-- ログイン画面 -->
 <html xmins:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>ログイン画面</title>
-		<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="/css/normalize.css">
-		<link rel="stylesheet" href="/css/common.css">
-	</head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ログイン画面</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
 <body>
-	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
-	<form name="LOGIN_FORM" th:action="@{/login}" method="post">
-		<table style="padding: 30px; background-color: white; margin: auto;">
-			<tr>
-				<td>ユーザID</td>
-				<td><input type="text" name="USER_ID" maxlength="15" th:value="${USER_ID}"></td>
-			</tr>
-			<tr>
-				<td>パスワード</td>
-				<td><input type="password" name="PASSWORD" maxlength="15"></td>
-			</tr>
-			<tr style="text-align: end;">
-				<td><input type="submit" style="font-size: 17px; margin-top: 15px;" value="ログイン"></td>
-				<td><input type="button" name="RESET" style="font-size: 17px; margin-top: 15px;" value="クリア"></td>
-			</tr>
-		</table>
-	</form>
-	<span th:text="${message}"></span>
-	<div style="width: 180px; height: 215px; margin: auto; margin-top: 100px;
-		background-image: url('../image/fugu.png'); background-repeat: no-repeat;"></div>
-	<script th:inline="javascript">
-	/*<![CDATA[*/
-		$(function(){
-		$('input[name="RESET"]').on('click', function() {
-			$('input[name="USER_ID"]').val('');
-			$('input[name="PASSWORD"]').val('');
-		})
-		$('form').submit(function() {
-			if($('input[name="USER_ID"]').val().match(/[^a-zA-Z0-9]+/) ||
-					$('input[name="PASSWORD"]').val().match(/[^a-zA-Z0-9]+/)) {
-				alert("ユーザID・パスワードには半角英数字のみ使用可能です。");
-				return false;
-			} else if ($('input[name="USER_ID"]').val().length < 6 ||
-					$('input[name="PASSWORD"]').val().length < 6) {
-				alert("ユーザID・パスワードは6桁以上で入力して下さい。");
-				return false;
-			} else {
-				$('input[type="submit"]').prop('disabled', true);
-			};
-		})
-		});
-	/*]]>*/
-	</script>
+<div class="container">
+	<div class="row align-items-center" style="height: 250px;">
+	</div>
+	<div class="row align-items-center">
+		<div class="offset-md-3 col-md-6" style="background-color: white;">
+		<form name="LOGIN_FORM" th:action="@{/login}" method="post">
+			<div class="row align-items-center" style="height: 90px;">
+				<div class="offset-md-1 col-md-4">ユーザID</div>
+				<div class="col-md-5"><input type="text" name="USER_ID" maxlength="15" th:value="${USER_ID}" style="text-align: left;"></div>
+			</div>
+			<div class="row align-items-center" style="height: 90px;">
+				<div class="offset-md-1 col-md-4" style="text-align: center;">パスワード</div>
+				<div class="col-md-5"><input type="password" name="PASSWORD" maxlength="15" style="text-align: left;"></div>
+			</div>
+			<div class="row align-items-center" style="height: 50px;">
+				<div class="offset-md-2 col-md-4"><input type="submit" value="ログイン"></div>
+				<div class="col-md-4 d-none d-md-block"><input type="button" name="RESET" value="クリア"></div>
+			</div>
+		</form>
+		</div>
+	</div>
+	<div class="row align-items-center" style="height: 70px;">
+		<div class="offset-md-3 col-md-6 errAlert" th:text="${message}"></div>
+	</div>
+	<img src="../image/fugu.png"></img>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(function(){
+	$('input[name="RESET"]').on('click', function() {
+		$('input[name="USER_ID"]').val('');
+		$('input[name="PASSWORD"]').val('');
+	})
+	$('form').submit(function() {
+		if($('input[name="USER_ID"]').val().match(/[^a-zA-Z0-9]+/) ||
+				$('input[name="PASSWORD"]').val().match(/[^a-zA-Z0-9]+/)) {
+			alert("ユーザID・パスワードには半角英数字のみ使用可能です。");
+			return false;
+		} else if ($('input[name="USER_ID"]').val().length < 6 ||
+				$('input[name="PASSWORD"]').val().length < 6) {
+			alert("ユーザID・パスワードは6桁以上で入力して下さい。");
+			return false;
+		} else {
+			$('input[type="submit"]').prop('disabled', true);
+		};
+	})
+	});
+/*]]>*/
+</script>
 </body>
 </html>

@@ -22,7 +22,6 @@ import com.vali.common.ValiConstant;
 import com.vali.common.ValiUtility;
 import com.vali.common.entity.UserMst;
 
-
 /**
  * <p>ログインサービスクラス</p>
  * @author rei mitsu

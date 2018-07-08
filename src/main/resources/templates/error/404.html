@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <!-- エラー画面 -->
 <html xmins:th="http://www.thymeleaf.org">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>エラー画面</title>
-		<link rel="stylesheet" href="/css/normalize.css">
-		<link rel="stylesheet" href="/css/common.css">
-	</head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>エラー画面</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
 <body>
-	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
 	<div>ページが見つかりません。</div>
 </body>
 </html>

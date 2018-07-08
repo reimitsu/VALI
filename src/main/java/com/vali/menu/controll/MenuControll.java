@@ -16,10 +16,12 @@ import com.vali.menu.service.MenuService;
 @Controller
 public class MenuControll {
 
-    @Autowired MenuService menuService;
+    @Autowired
+    MenuService menuService;
 
     @RequestMapping("/menu")
     public ModelAndView init(ModelAndView mav, Principal principal) {
+        //ログインIDからユーザ名を取得する。
         String userName = menuService.getUsername(principal.getName());
         mav.addObject("username", userName);
         mav.addObject("memo", "現在メンテナンス中です。");

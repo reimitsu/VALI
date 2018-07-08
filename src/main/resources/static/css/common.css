@@ -1,6 +1,16 @@
 @charset "UTF-8";
 
+* {
+	border-radius: 5px;
+	text-align: center;
+}
+
 body {
-	font-family: -webkit-pictograph;
 	background-color: #CCFF99;
+}
+
+.errAlert {
+	background-color: #FF7F8F;
+	color: white;
+	min-height: 0px;
 }
