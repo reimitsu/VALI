@@ -15,19 +15,19 @@
 	<div class="row align-items-center" style="height: 250px;">
 	</div>
 	<div class="row align-items-center">
-		<div class="offset-md-3 col-md-6" style="background-color: white;">
+		<div class="offset-md-3 col-md-6" style="background-color: #ffe4e1;">
 		<form name="LOGIN_FORM" th:action="@{/login}" method="post">
 			<div class="row align-items-center" style="height: 90px;">
-				<div class="offset-md-1 col-md-4">ユーザID</div>
-				<div class="col-md-5"><input type="text" name="USER_ID" maxlength="15" th:value="${USER_ID}" style="text-align: left;"></div>
+				<div class="offset-md-1 col-md-4" style="font-size: 18px;">ユーザID</div>
+				<div class="col-md-5"><input type="text" name="USER_ID" maxlength="15" size="18" th:value="${USER_ID}" style="text-align: left;"></div>
 			</div>
 			<div class="row align-items-center" style="height: 90px;">
-				<div class="offset-md-1 col-md-4" style="text-align: center;">パスワード</div>
-				<div class="col-md-5"><input type="password" name="PASSWORD" maxlength="15" style="text-align: left;"></div>
+				<div class="offset-md-1 col-md-4" style="font-size: 18px;">パスワード</div>
+				<div class="col-md-5"><input type="password" name="PASSWORD" maxlength="15" size="18" style="text-align: left;"></div>
 			</div>
 			<div class="row align-items-center" style="height: 50px;">
-				<div class="offset-md-2 col-md-4"><input type="submit" value="ログイン"></div>
-				<div class="col-md-4 d-none d-md-block"><input type="button" name="RESET" value="クリア"></div>
+				<div class="offset-md-2 col-md-4"><input type="image" name="LOGIN" src="../image/login.gif"></div>
+				<div class="col-md-4 d-none d-md-block"><input type="image" name="RESET" src="../image/clear.gif"></div>
 			</div>
 		</form>
 		</div>
@@ -43,6 +43,7 @@
 	$('input[name="RESET"]').on('click', function() {
 		$('input[name="USER_ID"]').val('');
 		$('input[name="PASSWORD"]').val('');
+		return false;
 	})
 	$('form').submit(function() {
 		if($('input[name="USER_ID"]').val().match(/[^a-zA-Z0-9]+/) ||
@@ -54,7 +55,7 @@
 			alert("ユーザID・パスワードは6桁以上で入力して下さい。");
 			return false;
 		} else {
-			$('input[type="submit"]').prop('disabled', true);
+			$('input[name="LOGIN"]').prop('disabled', true);
 		};
 	})
 	});
