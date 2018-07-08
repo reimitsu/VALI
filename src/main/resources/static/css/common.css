@@ -9,8 +9,14 @@ body {
 	background-color: #CCFF99;
 }
 
-.errAlert {
+.warnAlert {
 	background-color: #4169e1;
+	color: white;
+	min-height: 0px;
+}
+
+.errAlert {
+	background-color: #dc143c;
 	color: white;
 	min-height: 0px;
 }
