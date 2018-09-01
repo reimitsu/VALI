@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<!-- エラー画面 -->
 <html xmins:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>エラー画面</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<title>ページが見つかりません</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="/css/common.css">
-	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div style="height: 250px;"></div>
-	<div style="margin: auto;"><img src="../image/404.png"></img></div>
+<div class="container-fluid">
+	<div class="row header"></div>
+	<div class="twoHeight"></div>
+	<div class="offset-md-4 col-md-4">
+		<div><img src="../image/404.png"></img></div>
+		<div class="right"><a href="/">ログイン画面へ</a></div>
+	</div>
+</div>
 </body>
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </html>

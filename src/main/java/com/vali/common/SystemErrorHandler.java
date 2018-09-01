@@ -4,21 +4,21 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * <p>共通エラーハンドラクラス</p>
+ * 共通エラーハンドラクラス
  * @author rei mitsu
  */
 @ControllerAdvice
 public class SystemErrorHandler {
 
     /**
-     * <p>処理されない例外が発生した場合、ログを出力しエラー画面に遷移させる。</p>
+     * 処理されない例外が発生した場合、ログを出力しエラー画面に遷移させる。
      * @return 遷移先画面
      */
     @ExceptionHandler(Exception.class)
-    public String handleError(Exception exception) {
+    public String errorHandle(Exception exception) {
         if(!(exception instanceof ValiError)) {
             exception.printStackTrace();
         }
-        return "Error";
+        return "Error.html";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
- * <p>認証定義クラス</p>
+ * 認証定義クラス
  * @author rei mitsu
  */
 @Configuration
@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/image/**", "/css/**", "/webjars/**", "/js/**");
+        web.ignoring().antMatchers("/image/**", "/css/**", "/webjars/**");
     }
 
     @Override

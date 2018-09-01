@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vali.common.ValiError;
 import com.vali.common.ValiMessage;
 
 /**
- * <p>ログイン画面コントロール用クラス</p>
+ * ログイン画面コントロール用クラス
  * @author rei mitsu
  */
 @Controller
@@ -23,13 +24,14 @@ public class LoginControll {
             ModelAndView mav) {
         mav.addObject("USER_ID", userId);
         String viewName = "login/Login.html";
-        //ログイン認証失敗時、画面にメッセージを出力
+        // ログイン認証失敗時、画面にメッセージを出力
         if(exception != null) {
             if(exception instanceof BadCredentialsException) {
                 mav.addObject("message", ValiMessage.LOGIN_FAILED_MSG);
-            //システムエラーが発生した場合、エラー画面に遷移
+            // システムエラーが発生した場合、エラー画面に遷移
             } else {
-                viewName = "Error.html";
+                exception.printStackTrace();
+                throw new ValiError();
             }
         }
         mav.setViewName(viewName);

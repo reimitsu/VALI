@@ -1,65 +1,62 @@
 <!DOCTYPE html>
-<!-- ログイン画面 -->
 <html xmins:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ログイン画面</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="/css/common.css">
-	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
-	<div class="row align-items-center" style="height: 250px;">
-	</div>
-	<div class="row align-items-center">
-		<div class="offset-md-3 col-md-6" style="background-color: #ffe4e1;">
-		<form name="LOGIN_FORM" th:action="@{/login}" method="post">
-			<div class="row align-items-center" style="height: 90px;">
-				<div class="offset-md-1 col-md-4" style="font-size: 18px;">ユーザID</div>
-				<div class="col-md-5"><input type="text" name="USER_ID" maxlength="15" size="18" th:value="${USER_ID}" style="text-align: left;"></div>
+<div class="container-fluid">
+	<div class="row header"></div>
+	<div class="twoHeight"></div>
+	<div class="row">
+		<div class="offset-md-3 col-md-6 subBody threeHeight twoFont">
+		<form th:action="@{/login}" method="post">
+			<div class="row align-items-center oneHeight">
+				<div class="offset-md-1 col-md-5">ユーザID</div>
+				<div class="col-md-5"><input type="text" name="USER_ID" maxlength="15" th:value="${USER_ID}"></div>
 			</div>
-			<div class="row align-items-center" style="height: 90px;">
-				<div class="offset-md-1 col-md-4" style="font-size: 18px;">パスワード</div>
-				<div class="col-md-5"><input type="password" name="PASSWORD" maxlength="15" size="18" style="text-align: left;"></div>
+			<div class="row align-items-center oneHeight">
+				<div class="offset-md-1 col-md-5">パスワード</div>
+				<div class="col-md-5"><input type="password" name="PASSWORD" maxlength="20"></div>
 			</div>
-			<div class="row align-items-center" style="height: 50px;">
-				<div class="offset-md-2 col-md-4"><input type="image" name="LOGIN" src="../image/login.gif"></div>
-				<div class="col-md-4 d-none d-md-block"><input type="image" name="RESET" src="../image/clear.gif"></div>
+			<div class="row align-items-center justify-content-around oneHeight">
+				<div><input type="submit" name="LOGIN" value="ログイン"></div>
+				<div class="d-none d-md-block"><input type="button" name="RESET" value="クリア"></div>
 			</div>
 		</form>
 		</div>
 	</div>
-	<div class="row align-items-center" style="height: 70px;">
-		<div class="offset-md-3 col-md-6 warnAlert" th:text="${message}"></div>
-	</div>
-	<img src="../image/fugu.png"></img>
+	<div class="oneHeight"></div>
+	<div class="offset-md-3 col-md-6 warnAlert" th:text="${message}"></div>
 </div>
-<script th:inline="javascript">
-/*<![CDATA[*/
-	$(function(){
-	$('input[name="RESET"]').on('click', function() {
-		$('input[name="USER_ID"]').val('');
-		$('input[name="PASSWORD"]').val('');
-		return false;
-	})
-	$('form').submit(function() {
-		if($('input[name="USER_ID"]').val().match(/[^a-zA-Z0-9]+/) ||
-				$('input[name="PASSWORD"]').val().match(/[^a-zA-Z0-9]+/)) {
-			alert("ユーザID・パスワードには半角英数字のみ使用可能です。");
-			return false;
-		} else if ($('input[name="USER_ID"]').val().length < 6 ||
-				$('input[name="PASSWORD"]').val().length < 6) {
-			alert("ユーザID・パスワードは6桁以上で入力して下さい。");
-			return false;
-		} else {
-			$('input[name="LOGIN"]').prop('disabled', true);
-		};
-	})
-	});
-/*]]>*/
-</script>
 </body>
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		$(function(){
+		$('input[name="RESET"]').on('click', function() {
+			$('input[name="USER_ID"]').val('');
+			$('input[name="PASSWORD"]').val('');
+		})
+		$('form').submit(function() {
+			if($('input[name="USER_ID"]').val().match(/[^a-zA-Z0-9]/) ||
+					$('input[name="PASSWORD"]').val().match(/[^a-zA-Z0-9]/)) {
+				alert("ユーザID・パスワードには半角英数字のみ使用可能です。");
+				return false;
+			} else if ($('input[name="USER_ID"]').val().length < 6 ||
+					$('input[name="PASSWORD"]').val().length < 6) {
+				alert("ユーザID・パスワードは6桁以上で入力して下さい。");
+				return false;
+			} else {
+				$('input[name="LOGIN"]').prop('disabled', true);
+			};
+		})
+		});
+	/*]]>*/
+	</script>
 </html>

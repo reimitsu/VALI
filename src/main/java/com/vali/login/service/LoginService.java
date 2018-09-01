@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -23,7 +25,7 @@ import com.vali.common.ValiUtility;
 import com.vali.common.entity.UserMst;
 
 /**
- * <p>ログインサービスクラス</p>
+ * ログインサービスクラス
  * @author rei mitsu
  */
 @Service
@@ -32,30 +34,35 @@ public class LoginService implements UserDetailsService {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private HttpSession session;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        //入力されたユーザIDが空の場合、ログイン失敗
+        // 入力されたユーザIDが空の場合、ログイン失敗
         if(username == null || username.equals("")) {
             ValiUtility.logWrite("VALIER001", null);
             throw new UsernameNotFoundException("");
         }
 
-        //DBからユーザ情報を取得する。
+        // DBからユーザ情報を取得する。
         SqlParameterSource param = new MapSqlParameterSource("USER_ID", username);
         UserMst user = null;
         try {
             user = jdbcTemplate.queryForObject(
                     "SELECT * FROM USER_MST WHERE USER_ID = :USER_ID AND DEL_FLG = '0'",
                     param, new BeanPropertyRowMapper<UserMst>(UserMst.class));
-        //ユーザ情報が取得できなかった場合、ログイン失敗
+        // ユーザ情報が取得できなかった場合、ログイン失敗
         } catch (EmptyResultDataAccessException e) {
             ValiUtility.logWrite("VALIER002", username);
             throw new UsernameNotFoundException("");
         }
         String password = user.getPassword();
+        // セッションにユーザ名をセットする。
+        session.setAttribute("UserName", user.getUserName());
         ArrayList<String> roles = new ArrayList<String>();
-        //管理者フラグを参照し権限を付与
+        // 管理者フラグを参照し権限を付与
         if(ValiConstant.MANAGE_FLG_ADMIN.equals(user.getManageFlg())) {
             roles.add("ROLE_ADMIN");
             roles.add("ROLE_USER");

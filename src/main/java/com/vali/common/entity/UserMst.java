@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * <p>ユーザマスタエンティティクラス</p>
+ * ユーザマスタエンティティクラス
  * @author rei mitsu
  */
 @Data

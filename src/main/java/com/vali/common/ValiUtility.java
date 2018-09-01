@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import com.vali.login.service.LoginService;
 
 /**
- * <p>共通機能実装用クラス</p>
+ * 共通機能用クラス
  * @author rei mitsu
  */
 public class ValiUtility implements AutoCloseable {
@@ -24,7 +24,7 @@ public class ValiUtility implements AutoCloseable {
     }
 
     /**
-     * <p>プロパティファイル参照用メソッド</p>
+     * プロパティファイル参照用メソッド
      * @param filePath プロパティファイルパス
      * @param keyName プロパティキー名
      * @return 取得値
@@ -32,7 +32,7 @@ public class ValiUtility implements AutoCloseable {
     public static String readProperties(String filePath, String keyName) {
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream(filePath);
-                InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF_8);
+                InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF8);
                 BufferedReader br = new BufferedReader(isr);){
             prop.load(br);
         } catch (IOException e) {
@@ -43,7 +43,7 @@ public class ValiUtility implements AutoCloseable {
     }
 
     /**
-     * <p>ログ出力用メソッド</p>
+     * ログ出力用メソッド
      * @param errorCd エラーメッセージコード
      * @param arg 埋め込みメッセージ(無しの場合にはNULLを指定)
      */
@@ -52,7 +52,7 @@ public class ValiUtility implements AutoCloseable {
         String propValue = "";
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream(ValiConstant.LOG_PROP_FILE);
-                InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF_8);
+                InputStreamReader isr = new InputStreamReader(fis, ValiConstant.CHAR_SET_UTF8);
                 BufferedReader br = new BufferedReader(isr);){
             prop.load(br);
             if(arg == null) {

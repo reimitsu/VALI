@@ -1,18 +1,76 @@
 <!DOCTYPE html>
-<!-- メニュー画面 -->
 <html xmins:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>メニュー画面</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="/css/common.css">
-	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<p th:text="${memo}" style="margin-bottom: 220px;"></p>
-	<p th:text="ログイン中ユーザ"></p>
-	<p th:text="|${username} 様|"></p>
+<div class="container-fluid">
+	<div class="row align-items-center header">
+		<!-- PC用ヘッダ -->
+		<div class="col-md-3 d-none d-md-block borderRight">
+			<div>MENU</div>
+		</div>
+		<div class="col-md-9 d-none d-md-block right">
+			<div><a href="/mypage" th:text="|${username} 様|"></a></div>
+			<div><a href="/logout">ログアウト</a></div>
+		</div>
+		<!-- スマホ用ヘッダ -->
+		<div class="col-sm-12 d-block d-md-none right">
+			<button name="MENU">≡</button>
+		</div>
+	</div>
+	<div class="row maxHeight">
+		<div class="col-md-3 d-none d-md-block subBody">
+			<div>勤怠登録</div>
+			<ul><li><a href="/attendance">勤怠登録</a></li></ul>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<!-- 管理者のみ表示 -->
+			<div>管理メニュー</div>
+			<ul>
+			<li><a href="/attendancemanage">勤怠管理</a></li>
+			<li><a href="/usermanage">ユーザ管理</a></li>
+			</ul>
+		</div>
+		</div>
+		<div class="col-md-9 d-none d-md-block main" id="MAIN">
+		</div>
+		<!-- スマホ用メニュー -->
+		<div class="col-11 col-sm-11 d-md-none subBody" id="MBMENU">
+			<div>勤怠登録</div>
+			<ul><li><a href="/attendance">勤怠登録</a></li></ul>
+		<div sec:authorize="hasRole('ROLE_ADMIN')">
+			<!-- 管理者のみ表示 -->
+			<div>管理メニュー</div>
+			<ul>
+			<li><a href="/attendancemanage">勤怠管理</a></li>
+			<li><a href="/usermanage">ユーザ管理</a></li>
+			</ul>
+		</div>
+			<ul>
+			<li><a href="/mypage">マイページ</a></li>
+			<li><a href="/logout">ログアウト</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
 </body>
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		$(function(){
+			$('#MAIN').toggle();
+			$('#MBMENU').toggle();
+			$('button[name="MENU"]').on('click', function() {
+				$('#MAIN').toggle();
+				$('#MBMENU').toggle();
+			})
+		});
+	/*]]>*/
+	</script>
 </html>

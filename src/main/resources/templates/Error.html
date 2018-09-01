@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<!-- エラー画面 -->
 <html xmins:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>エラー画面</title>
-	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap.min.css">
+	<title>エラー</title>
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="/css/common.css">
-	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div style="height: 300px;"></div>
-	<div class="errAlert" style="width: 330px; height: 60px; margin: auto; font-size: 20px;">システムエラーが発生しました。<br>管理者にお問い合わせ下さい。</div>
+<div class="container-fluid">
+	<div class="row header"></div>
+	<div class="fourHeight"></div>
+	<div class="offset-md-4 col-md-4">
+		<div class="errAlert">システムエラーが発生しました。<br>管理者にお問い合わせ下さい。</div>
+		<div class="right"><a href="/">ログイン画面へ</a></div>
+	</div>
+</div>
 </body>
+	<script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </html>
