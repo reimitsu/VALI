@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vali.common.ValiConstant;
+
 /**
  * メニュー画面コントロール用クラス
  * @author rei mitsu
@@ -18,6 +20,7 @@ public class MenuControll {
         // セッションからユーザ名を取得する。
         String userName = (String)session.getAttribute("UserName");
         mav.addObject("username", userName);
+        mav.addObject("title", ValiConstant.PAGE_TITLE_MENU);
         mav.setViewName("menu/Menu.html");
         return mav;
     }

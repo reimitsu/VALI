@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>メニュー画面</title>
+	<title th:text="${title}"></title>
 	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-grid.min.css">
 	<link rel="stylesheet" href="webjars/bootstrap/4.1.1/css/bootstrap-reboot.min.css">
 	<link rel="stylesheet" href="/css/common.css">
@@ -15,40 +15,43 @@
 		<div class="col-md-3 d-none d-md-block borderRight">
 			<div>MENU</div>
 		</div>
-		<div class="col-md-9 d-none d-md-block right">
+		<div class="col-10 col-sm-6 col-md-4">
+			<div id="TITLE" th:text="${title}"></div>
+		</div>
+		<div class="col-md-5 d-none d-md-block right">
 			<div><a href="/mypage" th:text="|${username} 様|"></a></div>
 			<div><a href="/logout">ログアウト</a></div>
 		</div>
 		<!-- スマホ用ヘッダ -->
-		<div class="col-sm-12 d-block d-md-none right">
+		<div class="col-2 col-sm-6 d-block d-md-none right">
 			<button name="MENU">≡</button>
 		</div>
 	</div>
 	<div class="row maxHeight">
 		<div class="col-md-3 d-none d-md-block subBody">
 			<div>勤怠登録</div>
-			<ul><li><a href="/attendance">勤怠登録</a></li></ul>
+			<ul><li><a id="attendance" href="javascript:void(0)">勤怠登録</a></li></ul>
 		<div sec:authorize="hasRole('ROLE_ADMIN')">
 			<!-- 管理者のみ表示 -->
 			<div>管理メニュー</div>
 			<ul>
-			<li><a href="/attendancemanage">勤怠管理</a></li>
-			<li><a href="/usermanage">ユーザ管理</a></li>
+			<li><a id="attendancemanage" href="javascript:void(0)">勤怠管理</a></li>
+			<li><a id="usermanage" href="javascript:void(0)">ユーザ管理</a></li>
 			</ul>
 		</div>
 		</div>
-		<div class="col-md-9 d-none d-md-block main" id="MAIN">
+		<div class="col-md-9 main" id="MAIN">
 		</div>
 		<!-- スマホ用メニュー -->
 		<div class="col-11 col-sm-11 d-md-none subBody" id="MBMENU">
 			<div>勤怠登録</div>
-			<ul><li><a href="/attendance">勤怠登録</a></li></ul>
+			<ul><li><a id="attendancemb" href="javascript:void(0)">勤怠登録</a></li></ul>
 		<div sec:authorize="hasRole('ROLE_ADMIN')">
 			<!-- 管理者のみ表示 -->
 			<div>管理メニュー</div>
 			<ul>
-			<li><a href="/attendancemanage">勤怠管理</a></li>
-			<li><a href="/usermanage">ユーザ管理</a></li>
+			<li><a id="attendancemanagemb" href="javascript:void(0)">勤怠管理</a></li>
+			<li><a id="usermanagemb" href="javascript:void(0)">ユーザ管理</a></li>
 			</ul>
 		</div>
 			<ul>
@@ -64,11 +67,31 @@
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 		$(function(){
-			$('#MAIN').toggle();
-			$('#MBMENU').toggle();
-			$('button[name="MENU"]').on('click', function() {
+			$('#MBMENU').css('display', 'none');
+			$('button[name="MENU"], #MBMENU a').on('click', function() {
 				$('#MAIN').toggle();
 				$('#MBMENU').toggle();
+			})
+			$('#attendance, #attendancemb').on('click', function() {
+				$('#MAIN').load('items/Attendance.html');
+				$('title').html('勤怠登録');
+				$('#TITLE').text('勤怠登録');
+			})
+		});
+	/*]]>*/
+	</script>
+	<script sec:authorize="hasRole('ROLE_ADMIN')" th:inline="javascript">
+	/*<![CDATA[*/
+		$(function(){
+			$('#attendancemanage, #attendancemanagemb').on('click', function() {
+				$('#MAIN').load('items/Attendancemanage.html');
+				$('title').html('勤怠管理');
+				$('#TITLE').text('勤怠管理');
+			})
+			$('#usermanage, #usermanagemb').on('click', function() {
+				$('#MAIN').load('items/UserManage.html');
+				$('title').html('ユーザ管理');
+				$('#TITLE').text('ユーザ管理');
 			})
 		});
 	/*]]>*/

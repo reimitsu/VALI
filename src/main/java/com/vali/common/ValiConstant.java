@@ -18,4 +18,7 @@ public class ValiConstant {
     // ユーザマスタ：管理者フラグ（管理者権限有り）
     public final static String MANAGE_FLG_ADMIN = "1";
 
+    // 画面名（メニュー画面）
+    public final static String PAGE_TITLE_MENU = "メニュー";
+
 }
