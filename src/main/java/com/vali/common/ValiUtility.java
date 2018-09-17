@@ -5,10 +5,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.MessageFormat;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.GrantedAuthority;
 
 import com.vali.login.service.LoginService;
 
@@ -65,5 +68,48 @@ public class ValiUtility implements AutoCloseable {
             e.printStackTrace();
             throw new ValiError();
         }
+    }
+
+    /**
+     * LIKE検索用エスケープ処理
+     * @param target エスケープ対象
+     * @return エスケープ後文字列
+     */
+    public static String escape(String target) {
+        if(target == null) {
+            return "";
+        }
+        return target.replace("%", "\\%").replace("_", "\\_");
+    }
+
+    /**
+     * NullorEmptyチェック
+     * @param target チェック対象
+     * @return NullまたはEmptyならtrue
+     */
+    public static boolean isNullorEmpty(String target) {
+        if(target == null || target.length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 権限チェック
+     * @param authorities ユーザ権限情報
+     * @param targetAuth 対象権限
+     * @return 対象権限を所持している場合true
+     */
+    public static boolean AuthCheck(Collection<? extends GrantedAuthority> authorities, String targetAuth) {
+        if(isNullorEmpty(targetAuth)) {
+            return false;
+        }
+        Iterator<? extends GrantedAuthority> ite = authorities.iterator();
+        while(ite.hasNext()) {
+            if(targetAuth.equals(ite.next().toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

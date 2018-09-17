@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<div class="row align-items-center threeHeight">
+	<form action="/getUserData" method="get" id="SEARCHFORM">
+		<div class="offset-1">ID<input type="text" maxlength="15" size="13" name="USER_ID">名前<input type="text" maxlength="15" size="13" name="USER_NAME"></div>
+	</form>
+	<div class="offset-2"><input type="button" name="SEARCH" value="検索"> <input type="button" name="RESET" value="クリア"></div>
+	</div>
+	<div id="RESULT">
+	</div>
+</body>
+	<script>
+		$(function(){
+			$('input[name="USER_ID"]').on('blur', function() {
+				var val = $(this).val().replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);});
+				$(this).val(val);
+			});
+			$('input[name="RESET"]').on('click', function() {
+				$('input[name="USER_ID"]').val('');
+				$('input[name="USER_NAME"]').val('');
+			});
+			$('input[name="SEARCH"]').click(function() {
+				$('input[name="SEARCH"]').prop('disabled', true);
+				search();
+			});
+			$('#RESULT').on('click', 'input[name="NEW"]', function() {
+				$('#MAIN').text('');
+				var rowTag = '<div class="row align-items-center oneHeight"><div class="col-12 col-md-4">';
+				var endTag = '</div></div>'
+				$('#MAIN').append(''
+						+ '<form action="/addUserData" method="post" id="ADDFORM">'
+						+ rowTag + 'ID<input type="text" maxlength="15" name="ADDID">' + endTag
+						+ rowTag + 'パスワード<input type="password" autocomplete="off" maxlength="20" name="ADDPASS">' + endTag
+						+ rowTag + '確認用パスワード<input type="password" autocomplete="off" maxlength="20" name="CHECKPASS">' + endTag
+						+ rowTag + '名前<input type="text" maxlength="15" name="ADDNAME">' + endTag
+						+ rowTag + '<label for="ADMIN">管理者</label><input type="checkbox" name="ADDAUTH" id="ADMIN" value="1">' + endTag
+						+ '</form>'
+						+ '<div class="row align-items-center oneHeight"><div class="offset-1"><input type="button" name="ADD" value="登録"></div></div>');
+			});
+		});
+		function search() {
+			$.ajax({
+				type : $('#SEARCHFORM').prop('method'),
+				url : $('#SEARCHFORM').prop('action'),
+				data : $('#SEARCHFORM').serialize(),
+				dataType : 'json',
+				timeout : 100000,
+				success : function(data) {
+					success(data);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					error(XMLHttpRequest, textStatus, errorThrown);
+				}
+			});
+		}
+		function success(data) {
+			$('#RESULT').text('');
+			$('#RESULT').append('<div><input type="button" name="NEW" value="新規登録"></div>');
+			if(0 < data.length) {
+				$('#RESULT').append('<div class="row contents">'
+						+ '<div class="col-3">ID</div>'
+						+ '<div class="col-4">名前</div>'
+						+ '<div class="col-2">権限</div>'
+						+ '<div class="col-3"></div>'
+						+ '</div>');
+				for (var i = 0; i < data.length; i++) {
+					var manage = '';
+					if(data[i].manageFlg == '1') {
+						manage ='管理者'
+					}
+					$('#RESULT').append('<div class="row items">'
+							+ '<div class="col-3">' + data[i].userId + '</div>'
+							+ '<div class="col-4">' + data[i].userName + '</div>'
+							+ '<div class="col-2">' + manage + '</div>'
+							+ '<div class="col-3 center"><input type="button" name="CHANGE" value="変更"> '
+							+ '<input type="button" name="DELETE" value="削除"></div>'
+							+ '</div>');
+				}
+			} else {
+				$('#RESULT').append('<div>検索結果が0件です。</div>');
+			}
+			$('input[name="SEARCH"]').prop('disabled', false);
+		}
+		function error(XMLHttpRequest, textStatus, errorThrown) {
+			console.log('error:' + XMLHttpRequest + ' status:' + textStatus + ' errorThrown:' + errorThrown);
+			window.location.href = '/logout';
+		}
+	</script>
+</html>

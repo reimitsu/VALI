@@ -41,7 +41,7 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         // 入力されたユーザIDが空の場合、ログイン失敗
-        if(username == null || username.equals("")) {
+        if(ValiUtility.isNullorEmpty(username)) {
             ValiUtility.logWrite("VALIER001", null);
             throw new UsernameNotFoundException("");
         }

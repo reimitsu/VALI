@@ -4,6 +4,52 @@ body {
 	background-color: #CCFF99;
 }
 
+a {
+	text-decoration: underline;
+}
+
+img {
+	width: 100%;
+}
+
+input {
+	border-radius: 5px;
+	width: 100%;
+}
+
+input[type="submit"] {
+	background-color: #4169E1;
+	color: #F9F7FE;
+	font-size: 1.1rem;
+	width: 5.3rem;
+}
+
+input[type="submit"]:hover {
+	background-color: #F9F7FE;
+	color: #4169E1;
+}
+
+input[type="button"] {
+	background-color: #F9F7FE;
+	color: #4169E1;
+	font-size: 1.1rem;
+	width: 5.3rem;
+}
+
+.items input[type="button"] {
+	font-size: 0.8rem;
+	width: 3rem;
+}
+
+input[type="button"]:hover {
+	background-color: #4169E1;
+	color: #F9F7FE;
+}
+
+input[type="checkbox"] {
+	width: 1rem;
+}
+
 .subBody {
 	background-color: #FFE4E1;
 }
@@ -16,25 +62,52 @@ body {
 	height: 10vh;
 }
 
-.main {
-	overflow-y: auto;
+.header a {
+	color: #F9F7FE;
+	font-size: 1.1rem;
+}
+
+.header button {
+	color: #F9F7FE;
+	font-size: 2.8rem;
+	background-color: #050000;
+	border: none;
+	line-height: normal;
 }
 
 .header .borderRight {
 	border-right-color: #F9F7FE;
-    border-right-style: dashed;
+	border-right-style: dashed;
 }
 
-.header a {
-    color: #F9F7FE;
-    font-size: 1.1rem;
+.contents {
+	background-color: #FFBB99;
+	font-weight: bold;
 }
 
-.header button {
-    color: #F9F7FE;
-    font-size: 3rem;
-    background-color: #050000;
-    border: none;
+.items {
+	background-color: #CFFFFF;
+	word-wrap: break-word;
+}
+
+.items:nth-child(2n) {
+	background-color: #F9F7FE;
+}
+
+.items:hover {
+	background-color: #FFDFFF;
+}
+
+.contents div, .items div {
+	border: inset 1px;
+}
+
+.main {
+	overflow-y: auto;
+}
+
+.center {
+	text-align: center;
 }
 
 .right {
@@ -79,43 +152,6 @@ body {
 
 .threeFont {
 	font-size: 1.3rem;
-}
-
-a {
-	text-decoration: underline;
-}
-
-input {
-	border-radius: 5px;
-	width: 100%;
-}
-
-img {
-	width: 100%;
-}
-
-input[type="submit"] {
-	background-color: #4169E1;
-	color: #F9F7FE;
-	font-size: 1.1rem;
-	width: 5.3rem;
-}
-
-input[type="submit"]:hover {
-	background-color: #F9F7FE;
-	color: #4169E1;
-}
-
-input[type="button"] {
-	background-color: #F9F7FE;
-	color: #4169E1;
-	font-size: 1.1rem;
-	width: 5.3rem;
-}
-
-input[type="button"]:hover {
-	background-color: #4169E1;
-	color: #F9F7FE;
 }
 
 .warnAlert {
