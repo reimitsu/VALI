@@ -26,6 +26,12 @@ public class UserManageControll {
     @Autowired
     private UserManageService userManageService;
 
+    /**
+     * ユーザ情報を取得する。
+     * @param request
+     * @param authentication
+     * @return
+     */
     @RequestMapping(value = "/getUserData", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<UserMst>> getUserData(HttpServletRequest request ,Authentication authentication) {
@@ -37,5 +43,30 @@ public class UserManageControll {
             return ResponseEntity.ok(user);
         }
         return null;
+    }
+
+    /**
+     * ユーザを登録する。
+     * @param request
+     * @param authentication
+     * @return エラーメッセージ
+     */
+    @RequestMapping(value = "/addUserData", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] addUserData(HttpServletRequest request ,Authentication authentication) {
+        String[] errorMessage = {"権限がありません。"};
+        // 管理者権限を持たないユーザによる登録が行われた場合、エラーメッセージを返却。
+        if(ValiUtility.AuthCheck(authentication.getAuthorities(), "ROLE_ADMIN")) {
+            String addId = (String)request.getParameter("ADDID");
+            String addPass = (String)request.getParameter("ADDPASS");
+            String checkPass = (String)request.getParameter("CHECKPASS");
+            String addName = (String)request.getParameter("ADDNAME");
+            String addAuth = (String)request.getParameter("ADDAUTH");
+            errorMessage = userManageService.addUserInfoCheck(addId, addPass, checkPass, addName, addAuth);
+            if(errorMessage == null || errorMessage.length == 0) {
+                errorMessage = userManageService.addUserInfo(addId, addPass, addName, addAuth);
+            }
+        }
+        return errorMessage;
     }
 }
