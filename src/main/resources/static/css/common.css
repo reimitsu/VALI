@@ -33,6 +33,10 @@ input {
 	width: 100%;
 }
 
+input[readonly] {
+	background-color: #E4E4E4;
+}
+
 input[type="submit"] {
 	background-color: #4169E1;
 	color: #F9F7FE;
@@ -172,6 +176,10 @@ input[type="checkbox"] {
 
 .threeFont {
 	font-size: 1.3rem;
+}
+
+.note {
+	text-decoration: underline;
 }
 
 .warnAlert {

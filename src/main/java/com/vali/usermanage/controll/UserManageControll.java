@@ -69,4 +69,35 @@ public class UserManageControll {
         }
         return errorMessage;
     }
+
+    /**
+     * ユーザ情報を変更する。
+     * @param request
+     * @param authentication
+     * @return エラーメッセージ
+     */
+    @RequestMapping(value = "/changeUserData", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] changeUserData(HttpServletRequest request ,Authentication authentication) {
+        String[] errorMessage = {"権限がありません。"};
+        // 管理者権限を持たないユーザによる登録が行われた場合、エラーメッセージを返却。
+        if(ValiUtility.AuthCheck(authentication.getAuthorities(), "ROLE_ADMIN")) {
+            String addId = (String)request.getParameter("ADDID");
+            String addPass = (String)request.getParameter("ADDPASS");
+            String checkPass = (String)request.getParameter("CHECKPASS");
+            String addName = (String)request.getParameter("ADDNAME");
+            String addAuth = (String)request.getParameter("ADDAUTH");
+            boolean passwordResetFlg = true;
+            if("".equals(addPass) && "".equals(checkPass)) {
+                errorMessage = userManageService.addUserInfoCheck(addId, "111111", "111111", addName, addAuth);
+                passwordResetFlg = false;
+            } else {
+                errorMessage = userManageService.addUserInfoCheck(addId, addPass, checkPass, addName, addAuth);
+            }
+            if(errorMessage == null || errorMessage.length == 0) {
+                    userManageService.changeUserInfo(addId, addPass, addName, addAuth, passwordResetFlg);
+            }
+        }
+        return errorMessage;
+    }
 }

@@ -29,7 +29,7 @@ public class UserManageService {
     PasswordEncoder passwordEncoder;
 
     /**
-     * ユーザ情報検索SQL作成
+     * ユーザ情報検索
      * @param userId ユーザID
      * @param userName ユーザ名
      * @return ユーザ情報リスト
@@ -82,11 +82,12 @@ public class UserManageService {
     }
 
     /**
-     * ユーザ情報登録SQL作成
+     * ユーザ情報登録
      * @param addId
      * @param addPass
      * @param addName
      * @param addAuth
+     * @return エラーメッセージ
      */
     public String[] addUserInfo(String addId, String addPass, String addName, String addAuth) {
         SqlParameterSource param = new MapSqlParameterSource("USER_ID", addId);
@@ -111,5 +112,33 @@ public class UserManageService {
                 + "DO UPDATE SET USER_NAME = :USER_NAME, PASSWORD = :PASSWORD, DEL_FLG = '0', MANAGE_FLG = :MANAGE_FLG";
         jdbcTemplate.update(sql, param);
         return null;
+    }
+
+    /**
+     * ユーザ情報更新
+     * @param addId
+     * @param addPass
+     * @param addName
+     * @param addAuth
+     * @param passwordResetFlg
+     */
+    public void changeUserInfo(String addId, String addPass, String addName, String addAuth, boolean passwordResetFlg) {
+        String sql = "UPDATE USER_MST "
+                + "SET USER_NAME = :USER_NAME, MANAGE_FLG = :MANAGE_FLG "
+                + "WHERE USER_ID = :USER_ID";
+        if(passwordResetFlg) {
+            addPass = passwordEncoder.encode(addPass);
+            sql = "UPDATE USER_MST "
+                    + "SET USER_NAME = :USER_NAME, PASSWORD = :PASSWORD, MANAGE_FLG = :MANAGE_FLG "
+                    + "WHERE USER_ID = :USER_ID";
+        }
+        if(addAuth == null) {
+            addAuth = "0";
+        }
+        SqlParameterSource param = new MapSqlParameterSource("USER_ID", addId)
+                .addValue("USER_NAME", addName)
+                .addValue("PASSWORD", addPass)
+                .addValue("MANAGE_FLG", addAuth);
+        jdbcTemplate.update(sql, param);
     }
 }
