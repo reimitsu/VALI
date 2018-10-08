@@ -45,7 +45,7 @@ public class UserManageService {
         if(!ValiUtility.isNullorEmpty(userName)) {
             sql.append("USER_NAME LIKE :USER_NAME AND ");
         }
-        sql.append("DEL_FLG = '0'");
+        sql.append("DEL_FLG = '0' ORDER BY USER_ID");
         return jdbcTemplate.query(sql.toString(), param, new BeanPropertyRowMapper<UserMst>(UserMst.class));
     }
 
@@ -139,6 +139,18 @@ public class UserManageService {
                 .addValue("USER_NAME", addName)
                 .addValue("PASSWORD", addPass)
                 .addValue("MANAGE_FLG", addAuth);
+        jdbcTemplate.update(sql, param);
+    }
+
+    /**
+     * ユーザ情報削除
+     * @param userId
+     */
+    public void deleteUserInfo(String userId) {
+        String sql = "UPDATE USER_MST "
+                + "SET DEL_FLG = '1' "
+                + "WHERE USER_ID = :USER_ID";
+        SqlParameterSource param = new MapSqlParameterSource("USER_ID", userId);
         jdbcTemplate.update(sql, param);
     }
 }

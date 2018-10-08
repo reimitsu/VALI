@@ -1,4 +1,5 @@
 $(function(){
+//--- ユーザ管理 ---//
 	$('#MAIN').on('blur', 'input[name="USER_ID"]', function() {
 		var val = $(this).val().replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);});
 		$(this).val(val);
@@ -63,6 +64,21 @@ $(function(){
 		}
 		$('input[name="ADDUSER"]').prop('disabled', true);
 		add();
+	});
+	$('#MAIN').on('click', 'input[name="DELETE"]', function() {
+		if(confirm('ユーザを削除してもよろしいですか？')) {
+			$.ajax({
+				type : 'GET',
+				url : '/deleteUserData',
+				data : {ID: $(this).data('id')},
+				success : function(data) {
+					successDelete(data);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					error(XMLHttpRequest, textStatus, errorThrown);
+				}
+			});
+		}
 	});
 });
 function add() {
@@ -134,7 +150,16 @@ function successAdd(data) {
 		$('#MAIN').append('<div>ユーザを登録しました。</div>');
 	}
 }
+function successDelete(data) {
+	$('#MAIN').text('');
+	if(data.length > 0) {
+		$('#MAIN').append('<div>' + data[0] + '</div>');
+	} else {
+		$('#MAIN').append('<div>ユーザを削除しました。</div>');
+	}
+}
 function error(XMLHttpRequest, textStatus, errorThrown) {
 	console.log('error:' + XMLHttpRequest + ' status:' + textStatus + ' errorThrown:' + errorThrown);
 	window.location.href = '/logout';
 }
+//----------------//

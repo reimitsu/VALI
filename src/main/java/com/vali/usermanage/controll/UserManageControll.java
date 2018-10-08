@@ -100,4 +100,22 @@ public class UserManageControll {
         }
         return errorMessage;
     }
+
+    /**
+     * ユーザ情報を削除する。
+     * @param request
+     * @param authentication
+     * @return エラーメッセージ
+     */
+    @RequestMapping(value = "/deleteUserData", method = RequestMethod.GET)
+    @ResponseBody
+    public String[] deleteUserData(HttpServletRequest request ,Authentication authentication) {
+        String[] errorMessage = {"権限がありません。"};
+        // 管理者権限を持たないユーザによる削除が行われた場合、エラーメッセージを返却。
+        if(ValiUtility.AuthCheck(authentication.getAuthorities(), "ROLE_ADMIN")) {
+            String userId = (String)request.getParameter("ID");
+            userManageService.deleteUserInfo(userId);
+        }
+        return errorMessage;
+    }
 }
